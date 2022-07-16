@@ -1,0 +1,114 @@
+//https://www.hackerrank.com/challenges/between-two-sets/problem
+
+package mountBlue;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.*;
+import java.util.Scanner;
+
+public class p1_between_teo_sets {
+
+	public static void main(String[] args) {
+		ArrayList<Integer> a = new ArrayList<>();
+		ArrayList<Integer> b = new ArrayList<>();
+		a.add(3);
+		a.add(9);
+		a.add(6);
+		b.add(36);
+		b.add(72);
+		
+		getTotalX(a, b);
+
+	}
+
+	public static void getTotalX(List<Integer> a, List<Integer> b) {
+		int lcm = lcmArray(a);
+		int gcd = gcdArray(b);
+		System.out.println(a);
+		System.out.println(b);
+		int lowerBound = max(a);
+		int upperBound = min(a);
+		
+		ArrayList<Integer> list = new ArrayList<>();
+		for(int i=lowerBound; i<=upperBound; i++) {
+			if((lcm%i)==0){
+				list.add(i);
+			}
+		}
+	int count = 0;
+	for(int i=0; i<list.size();i++) {
+		if( (gcd%list.get(i))==0 ) {
+			count+=1;
+		}
+	}
+	System.out.println(count);
+	
+		
+	}
+	
+	public static int gcd(int a, int b) {
+		if(a==0) {
+			return b;
+		}else
+			return gcd(b%a,a);
+	}
+	
+	public static int gcdArray(List<Integer> list) {
+		int ans = list.get(0);
+		for(int i=1; i<list.size();i++) {
+			int element = list.get(i);
+			ans = gcd(ans,element);
+		}
+		return ans;
+	}
+	
+	public static int lcmArray(List<Integer> list) {
+		int lcm = 1;
+		int divisor = 2;
+		while(true) {
+			int counter = 0;
+			boolean flag = false;
+			for(int i=0; i<list.size();i++) {
+				if(list.get(i)==1) {
+					counter+=1;
+				}
+				if( (list.get(i)%divisor)==0 ) {
+					flag = true;
+					list.set(i, list.get(i)/divisor);
+				}
+			}
+			if(flag == true) {
+				lcm = lcm*divisor;
+			}else {
+				divisor+=1;
+			}
+			if(counter == list.size()-1) {
+				return lcm;
+			}
+			
+		}
+	}
+	
+	public static int max(List<Integer> list) {
+		int maximum = 0;
+		for(int i=0; i<list.size();i++) {
+			if(list.get(i) > list.get(maximum)) {
+				maximum = i;
+			}
+		}
+		return list.get(maximum);
+	}
+	
+	public static int min(List<Integer> list) {
+		int minimum = 0;
+		for(int i=0; i<list.size();i++) {
+			if(list.get(i) < list.get(minimum)) {
+				minimum = i;
+			}
+		}
+		return list.get(minimum);
+	}
+	
+	
+}
