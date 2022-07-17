@@ -1,0 +1,45 @@
+https://www.hackerrank.com/challenges/time-conversion/problem
+
+package mountBlue;
+import java.util.*;
+public class P3_time_conversion {
+
+	public static void main(String[] args) {
+		String s= "12:00:00AM";
+		timeConversion(s);
+
+	}
+	 public static void timeConversion(String s) {
+	        
+	        int hr = Integer.valueOf(s.substring(0,2));
+	        if(hr==12 && s.substring(8)=="AM"){
+	        	String str = "";
+	            str = str+"00"+s.substring(2,8);
+	            System.out.println(str);
+	            return;
+	        }
+	        else if(s.substring(8)=="AM"){
+	        	String str = "";
+	            str = str+s.substring(0,8);
+	            System.out.println(str);
+	            return;
+	        }
+	        else if( hr==12 && s.substring(8)=="PM" ){
+	        	String str = "";
+	            str =str+ s.substring(0,8);
+	            System.out.println(str);
+	            return;
+	        }
+	        else if( (hr>=1) && (hr<=11) && s.substring(8)=="PM" ){
+	        	String str = "";
+	            hr = hr+12;
+	            str =str+ hr+s.substring(2,8)+"";
+	            System.out.println(str);
+	            return;
+	        }
+	        
+	        
+
+	    }
+
+}
