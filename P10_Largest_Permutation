@@ -1,0 +1,50 @@
+https://www.hackerrank.com/challenges/largest-permutation/problem
+
+package mountBlue;
+import java.util.*;
+public class P10_largest_permutation {
+
+	public static void main(String[] args) {
+		ArrayList<Integer> list = new ArrayList<>();
+		list.add(4);
+		list.add(2);
+		list.add(3);
+		list.add(5);
+		list.add(1);
+		int k =3;
+		largestPermutation(k,list);
+
+	}
+	
+	 public static void largestPermutation(int k, List<Integer> arr) {
+		 // 4 2 3 5 1
+		 ArrayList<Integer> list = new ArrayList<>();
+		 for(int i=0; i<arr.size();i++) {
+			 list.add(arr.get(i));
+		 }
+		 Collections.sort(list, Collections.reverseOrder());
+		 System.out.println(list);
+		 
+		 int i = 0;
+		 int swap=0;
+		 // 4 2 3 5 1
+		 // 5 2 3 4 1
+		 // 5 4 3 2 1
+		 // 5 4 3 2 1
+		 while(i < k) {
+			 int max = list.get(i);
+			 if(arr.get(i)!=max) {
+				 int idx = Collections.binarySearch(arr, max);
+				 Collections.swap(arr, i, idx);
+				 i++;
+				 swap++;
+			 }else {
+				 i++;
+			 }
+		 }
+		System.out.println(arr);
+
+	 }
+	
+
+}
